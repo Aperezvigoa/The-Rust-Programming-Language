@@ -14,4 +14,13 @@ fn main() {
 
     y = 6;
     println!("The new value of y is: {y}");
+
+    // Like immutable variables, constants are not allowed to change
+    // You are not allowed to use mut with constants
+    // You declare const using the const keyword and the type of the value must be annotated
+    // Constant may be set only to a constant expression, not the result of a value
+    // Example:
+    const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
+    println!("This is a const example: {THREE_HOURS_IN_SECONDS}") // 10800
+
 }
