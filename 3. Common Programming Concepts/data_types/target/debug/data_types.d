@@ -1,0 +1,1 @@
+/home/cheddar/Documents/Courses/The\ Rust\ Programming\ Language/3.\ Common\ Programming\ Concepts/data_types/target/debug/data_types: /home/cheddar/Documents/Courses/The\ Rust\ Programming\ Language/3.\ Common\ Programming\ Concepts/data_types/src/main.rs
