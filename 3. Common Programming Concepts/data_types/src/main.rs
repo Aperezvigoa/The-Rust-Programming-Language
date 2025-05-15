@@ -72,4 +72,31 @@ fn main() {
     let cute_cat_emoji: char = '🐱';
     let letter_z_char: char = 'z';
     println!("Example of chars: {cute_cat_emoji} & {letter_z_char}");
+
+
+    // --- Compound Types
+
+    // --- Tuple
+    let tup: (i32, f64, bool) = (500, 3.14, true);
+
+    let (ivar, fvar, bvar) = tup;
+    println!("Value of ivar: {ivar}, value of fvar: {fvar}, value of bvar: {bvar}.");
+
+    // Other way to access tuple values
+    let new_tup: (f64, bool, i32) = (3.14, true, 201019);
+
+    let pi: f64 = new_tup.0;
+    let im_handsome: bool = new_tup.1;
+    let my_cat_birth: i32 = new_tup.2;
+
+    println!("Pi: {pi}\nI'm handsome: {im_handsome}\nMy cat birth is: {my_cat_birth}");
+
+    // Creating a mutable tuple
+    let mut mutable_tup: (i32, i32) = (0, 0);
+    mutable_tup.0 = 2001;
+    mutable_tup.1 = 2019;
+
+    let x: i32 = mutable_tup.0;
+    let y: i32 = mutable_tup.1;
+    println!("x = {x}\ny = {y}");
 }
