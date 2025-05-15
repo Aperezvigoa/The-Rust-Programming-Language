@@ -29,6 +29,7 @@ fn main() {
     println!("Example of binary number: {bin_num}.");
 
     // --- Floating-Point Types
+
     let default_fpoint = 2.0; // f64 as default
     println!("The default type of floating-point types is f64: {default_fpoint}.");
 
@@ -36,4 +37,27 @@ fn main() {
     let f32_fp: f32 = 3.56;
     println!("Example of f32 type: {f32_fp}.");
 
+    // --- Numeric Operations
+
+    // Addition
+    let sum: i32 = 16 + 42;
+    println!("The addition result is {sum}.");
+
+    // Substraction
+    let difference: f64 = 95.5 - 4.3;
+    println!("The substraction result is {difference}.");
+
+    // Multiplication
+    let product: i32 = 4 * 30;
+    println!("The multiplication result is {product}.");
+
+    // Division
+    let quotient: f64 = 56.7 / 32.2;
+    println!("The quotient division between two floating point types is {quotient}.");
+    let truncated: i32 = -29 / 8;
+    println!("The truncated result between two integers is {truncated}.");
+
+    // remainder
+    let remainder = 46 % 5;
+    println!("The modulus is {remainder}.");
 }
