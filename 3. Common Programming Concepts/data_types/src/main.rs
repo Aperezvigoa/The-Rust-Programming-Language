@@ -60,4 +60,16 @@ fn main() {
     // remainder
     let remainder = 46 % 5;
     println!("The modulus is {remainder}.");
+
+    // --- Boolean type
+
+    let t: bool = true;
+    let f: bool = false;
+    println!("The result of first boolean is {0} and the second is {1}.", t, f);
+
+    // --- Char Type
+
+    let cute_cat_emoji: char = '🐱';
+    let letter_z_char: char = 'z';
+    println!("Example of chars: {cute_cat_emoji} & {letter_z_char}");
 }
