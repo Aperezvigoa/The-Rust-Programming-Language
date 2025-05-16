@@ -1,3 +1,6 @@
+use core::panic;
+use std::io;
+
 fn main() {
 
     // --- Integer types
@@ -99,4 +102,38 @@ fn main() {
     let x: i32 = mutable_tup.0;
     let y: i32 = mutable_tup.1;
     println!("x = {x}\ny = {y}");
+
+    // --- Array
+
+    #[allow(unused_variables)]
+    let first_arr: [i32;5] = [1, 2, 3, 4, 5];
+    #[allow(unused_variables)]
+    let months = ["January", "Febraury", "March", "April", "May"];
+    #[allow(unused_variables)]
+    let arr_2d2 = [3, 5]; // [3, 3, 3, 3, 3];
+
+    // Accessing array elements
+    let arr: [i32; 5] = [1, 2, 3, 4, 5];
+
+    println!("Please enter an array index.");
+
+    let mut index = String::new();
+
+    // Reading line and saving into index.
+    io::stdin()
+        .read_line(&mut index)
+        .expect("Failed to read line");
+
+    // Shadowing index to convert it into usize.
+
+    let index: usize = index
+        .trim()
+        .parse()
+        .expect("Index entered was not a number");
+
+    println!("The index entered is: {index}");
+
+    let element: i32 = arr[index];
+
+    println!("The arr element at index {index} is: {element}");
 }
