@@ -137,6 +137,11 @@ fn main() {
 
         println!("{}.- {}", iterations, some_text);
     }
+
+    // --- Recursion
+    println!("\n*** Recursion ***\n");
+
+    recursive_count_down(10);
 }
 
 // --- Assignin Result of if Statement to Variable
@@ -149,4 +154,17 @@ fn even_or_odd(number: &i32) -> &str {
         "Odd"
     };
     result
+}
+
+// --- Recursive function example
+
+fn recursive_count_down(mut count_start: i32) {
+    println!("Count state {count_start}");
+    count_start -= 1;
+
+    if count_start > 0 {
+        recursive_count_down(count_start);
+    } else {
+        println!("We have finished here!");
+    }
 }
