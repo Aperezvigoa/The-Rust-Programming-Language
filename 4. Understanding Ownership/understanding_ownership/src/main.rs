@@ -60,6 +60,32 @@ fn main() {
     let b = a;
     // dbg!("{}", b); -> Dont run it xD
     println!("{}", b[0]);
+    
+    // a and b are on the stack, but the array is on the heap.
+    // The stack holds data associated with a specific function, while
+    // the heap holds data that can outlive a function
+
+    // --- A Box’s Owner Manages Deallocation
+
+    // If a variable is bound to a box, when Rust deallocates the
+    // variable's frame, the Rust deallocate the box's heap memory.
+
+    let a_num: i32 = 4;
+    println!("a_num -> {}", a_num);
+    make_and_drop();
+    println!("Box deallocated successfully!");
+
+    // Before make_and_drop() is executed, our stack memory only contains a_num
+    // When make_and_drop() executes a_box variable is added to a stack frame
+    // and 5 is assigned into the heap
+    // When make_a_drop() finishes its execution, a_box is deleted and then
+    // Rust deallocates the heap data.
+    // After this the heap is empty
+}
+
+fn make_and_drop() {
+    #[allow(unused_variables)]
+    let a_box = Box::new(5);
 }
 
 fn plus_one(n: i32) -> i32 {
