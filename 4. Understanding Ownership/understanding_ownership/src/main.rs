@@ -81,6 +81,33 @@ fn main() {
     // When make_a_drop() finishes its execution, a_box is deleted and then
     // Rust deallocates the heap data.
     // After this the heap is empty
+
+    // --- Collections Use Boxes
+
+    let first_name = String::from("Alex");
+    let full_name = add_suffix(first_name);
+
+    println!("{full_name}");
+
+    // This example is more complex, so let's check it
+    // 1 -
+    // In the first string "Alex" is allocated on the heap, it is owned by first_name
+    // 2 -
+    // Then we call add_suffix(first_name), this moves ownership of String from first_name
+    // to name. The string data is not copied, but the pointer to the data is copied.
+    // 3-
+    // The function name.push_str("Jr.") resizes the string's heap allocation. This does
+    // three things. First, it creates a new larger allocation. Second, it writes "AlexJr."
+    // into the new allocation, and third, it frees the original heap memory. first_name now
+    // points to deallocated memory.
+    // 4-
+    // Then the frame, add_suffix is gone, this function returned name, transferring ownership
+    // of the string to full_name
+}
+
+fn add_suffix(mut name: String) -> String {
+    name.push_str("Jr.");
+    name
 }
 
 fn make_and_drop() {
@@ -95,5 +122,5 @@ fn plus_one(n: i32) -> i32 {
 fn read(y: bool) {
     if y {
         println!("y is true!");
-    }
+    }    
 }
