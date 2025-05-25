@@ -190,7 +190,7 @@ Rust proporciona una construcción llamada #box para colocar datos en el heap. P
 let a = Box::new(0; 1_000_000); #L1
 let b = a; #L2 
 
-![[Screenshot from 2025-05-23 19-07-54.png]]
+![Example of memory](Images/example1.png)
 
 Ahora, de manera interna, solo hay un array. En L1, el valor de a es un puntero al array que está dentro del heap. 
 b = a, copia el puntero de a -> b, pero la data apuntada no es copiada. Notamos que en #L2 esta tachada, esto es porque ha sido movida (veremos esto que significa un poco más adelante).
@@ -227,7 +227,7 @@ fn make_and_drop() {
 }
 ```
 
-![[Screenshot from 2025-05-23 20-48-01.png]]
+![Example of memory](Images/example2.png)
 
 En #L1, antes de llamar a la función make_and_drop, el estado de la memoria es solo el stack frame para main. Luego en #L2 cuando llamamos a make_and_drop, a_box apunta a 5 que se encuentra en el heap.
 Una vez make_and_drop finaliza, Rust desasigna el stack frame y luego libera el heap. En #L3 el heap está vacío.
