@@ -103,10 +103,16 @@ fn main() {
     // 4-
     // Then the frame, add_suffix is gone, this function returned name, transferring ownership
     // of the string to full_name
+
+    // --- Cloning Avoids Moves
+    let first = String::from("Alex"); // first is never deallocated
+    let first_clone = first.clone();  // first_clone IS deallocated
+    let full = add_suffix(first_clone);
+    println!("{full}, originally {first}"); 
 }
 
 fn add_suffix(mut name: String) -> String {
-    name.push_str("Jr.");
+    name.push_str(" Jr.");
     name
 }
 
