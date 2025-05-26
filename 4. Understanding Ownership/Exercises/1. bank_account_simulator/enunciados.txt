@@ -1,0 +1,113 @@
+
+// Text Analyzer Challenge
+// 
+// Your task is to build a text analyzer that processes a piece of text
+// and provides various statistics about it. This exercise will test your
+// understanding of ownership, borrowing, functions, and control flow.
+//
+// Requirements:
+// 1. Create a struct called `TextStats` to hold analysis results
+// 2. Implement functions that take ownership vs. borrowing appropriately
+// 3. Handle different data types and mutability correctly
+// 4. Use control flow to process text character by character
+//
+// The analyzer should provide:
+// - Word count
+// - Character count (excluding spaces)
+// - Sentence count (count periods, exclamation marks, question marks)
+// - Most frequent character
+// - Longest word
+// - Average word length
+
+use std::collections::HashMap;
+
+// TODO: Define your TextStats struct here
+// Hint: Think about what data types each field should be
+
+// TODO: Implement this function
+// It should take ownership of the input string and return TextStats
+fn analyze_text(text: String) -> TextStats {
+    // Your implementation here
+    todo!()
+}
+
+// TODO: Implement this function  
+// It should borrow the text (not take ownership) and return just the word count
+fn count_words(text: &str) -> usize {
+    // Your implementation here
+    todo!()
+}
+
+// TODO: Implement this function
+// It should take a mutable reference to TextStats and update the sentence count
+fn update_sentence_count(stats: &mut TextStats, text: &str) {
+    // Your implementation here
+    todo!()
+}
+
+// TODO: Implement this function
+// It should find the most frequent character (excluding spaces and punctuation)
+// Return the character and its count as a tuple
+fn find_most_frequent_char(text: &str) -> Option<(char, usize)> {
+    // Your implementation here
+    // Hint: Use HashMap to count characters
+    todo!()
+}
+
+// TODO: Implement this function
+// It should find the longest word in the text
+fn find_longest_word(text: &str) -> Option<String> {
+    // Your implementation here
+    todo!()
+}
+
+fn main() {
+    let sample_text = String::from(
+        "Hello world! This is a sample text for analysis. \
+         How many words does this text contain? Let's find out! \
+         This text has multiple sentences and various characters."
+    );
+    
+    // Test borrowing vs ownership
+    let word_count = count_words(&sample_text);
+    println!("Word count (borrowed): {}", word_count);
+    
+    // This should still work because we only borrowed above
+    let stats = analyze_text(sample_text);
+    // Note: sample_text can't be used here anymore - why?
+    
+    println!("Analysis Results:");
+    println!("Words: {}", stats.word_count);
+    println!("Characters (no spaces): {}", stats.char_count);
+    println!("Sentences: {}", stats.sentence_count);
+    
+    if let Some(longest) = stats.longest_word {
+        println!("Longest word: {}", longest);
+    }
+    
+    if let Some((ch, count)) = stats.most_frequent_char {
+        println!("Most frequent character: '{}' ({} times)", ch, count);
+    }
+    
+    println!("Average word length: {:.2}", stats.average_word_length);
+}
+
+// Test cases for you to verify your implementation
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
+    #[test]
+    fn test_word_count() {
+        assert_eq!(count_words("hello world"), 2);
+        assert_eq!(count_words(""), 0);
+        assert_eq!(count_words("one"), 1);
+    }
+    
+    #[test]
+    fn test_analyze_basic() {
+        let stats = analyze_text("Hello world!".to_string());
+        assert_eq!(stats.word_count, 2);
+        assert_eq!(stats.sentence_count, 1);
+    }
+}
