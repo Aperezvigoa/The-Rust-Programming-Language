@@ -1,0 +1,39 @@
+# Sistema de Gestión de Tareas con Prioridades
+
+## El reto:
+Crea un sistema donde puedas gestionar tareas con diferentes prioridades y estados. Cada tarea puede estar en progreso, completada o pendiente.
+
+## Estructura de datos obligatoria:
+Una tarea debe contener:
+- Descripción (String)
+- Prioridad (número del 1 al 5, donde 5 es máxima)
+- Estado (usa números: 0=pendiente, 1=en progreso, 2=completada)
+- Tiempo estimado en horas (número entero)
+
+## Funciones que DEBES implementar:
+
+1. **`crear_tarea`** - Debe tomar ownership de la descripción
+2. **`cambiar_estado`** - Solo puede cambiar estados de forma lógica (pendiente→progreso→completada)
+3. **`actualizar_prioridad`** - Solo si la tarea NO está completada
+4. **`mostrar_tarea`** - Sin tomar ownership
+5. **`filtrar_por_prioridad`** - Recibe un vector de referencias a tareas y una prioridad mínima, devuelve cuántas cumplen el criterio
+6. **`tarea_mas_urgente`** - Recibe múltiples referencias y devuelve una referencia a la tarea de mayor prioridad que NO esté completada
+7. **`calcular_tiempo_total`** - Suma el tiempo de todas las tareas pendientes y en progreso
+
+## Desafíos específicos:
+- **PROHIBIDO** usar `.clone()` o `to_string()`
+- Debes manejar al menos 5 tareas diferentes
+- Implementa un menú que permita filtrar tareas por estado
+- La función `tarea_mas_urgente` debe manejar el caso donde todas están completadas
+- Crea una función que "archive" tareas completadas (las mueva de un vector a otro)
+
+## Bonus desafiante:
+Implementa una función `reorganizar_prioridades` que tome un vector mutable de referencias a tareas y reordene las prioridades automáticamente basándose en el tiempo estimado (menos tiempo = mayor prioridad).
+
+## Lo que te va a complicar la vida:
+- Manejar múltiples vectores con referencias
+- El borrowing cuando necesites acceder a múltiples tareas simultáneamente
+- La lógica de filtrado sin copiar datos
+- Retornar referencias opcionales de funciones
+
+Este ejercicio es significativamente más complejo. Te obligará a pensar profundamente sobre lifetime de referencias y cómo estructurar tu código para evitar problemas de borrowing.
