@@ -137,6 +137,24 @@ fn main() {
     // these permissions.
     // A mutable reference removes all permissions to the owner, when the
     // borrow ends, the owner gets all permissions again.
+
+    // --- The Borrow Checker Finds Permission Violations
+    // Data should not be aliased and mutated. The goal of these permissions is
+    // to ensure that data cannot be mutated if it is aliased. Creating a
+    // reference to dara, causes that data to be temporarily read-only until the
+    // reference is no longer in use.
+    // Rust uses thes permissions in its borrow checker. The borrow checker looks
+    // for potentially unsafe operations involving references.
+    // Unsafe program example:
+    /* ================================
+    let mut v: Vec<i32> = vec![1, 2, 3];
+    let num: &i32 = &v[2];
+    v.push(4);
+    println!("Third element is: {*num}");
+    ================================== */
+    // This code is unsafe because v loses Write and Own permissions temporarily,
+    // We use v.push without write permissions and with num reference in use.
+    // And if we use v.push when num is in use, num could be invalidated by push.
 }
 
 fn tell_full_name(name: &String, lastname: &String) {
