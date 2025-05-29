@@ -119,6 +119,24 @@ fn main() {
     // When we use push, the vector has to create a new allocation with
     // larger capacity, copy all elements over and deallocate the original
     // heap array.
+
+    // --- References Change Permissions on Places
+    // The core idea behind the borrow checker is that variables have three
+    // kinds of permissions on their data:
+
+    // - Read (R) -> Data can be copied to another location.
+    // - Write(W) -> Data can be mutated.
+    // - Own  (O) -> Data can be moved or dropped.
+
+    // These permissions dont exist at runtime, only within the compiler.
+    // They describe how the compiler "thinks" about your program before the
+    // program is executed.
+    // By default, a variable has read/own permissions (RO) on its data. If a
+    // variable is annotated with let mut, then it also has the write
+    // permission. The key idea is that references can temporarilly renove
+    // these permissions.
+    // A mutable reference removes all permissions to the owner, when the
+    // borrow ends, the owner gets all permissions again.
 }
 
 fn tell_full_name(name: &String, lastname: &String) {
