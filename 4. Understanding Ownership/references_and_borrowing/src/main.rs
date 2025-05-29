@@ -155,6 +155,45 @@ fn main() {
     // This code is unsafe because v loses Write and Own permissions temporarily,
     // We use v.push without write permissions and with num reference in use.
     // And if we use v.push when num is in use, num could be invalidated by push.
+    // Rust catches the potential violation of memory safety.
+
+    // --- Mutable References Provide Unique and Non-Owning Access to Data
+    // The references we have seen so far are read-only immutable references.
+    // Immutable references permit aliasong but disallow mutuation. However, its
+    // useful to temporarily provide mutable access to data without moving it.
+
+    let mut another_vector: Vec<i32> = vec![1, 2, 3]; // R + W + O
+    let num: &mut i32 = &mut another_vector[2];
+    *num += 1;
+    println!("Third element is {}", num);
+    println!("Vector is now {:?}", another_vector);
+
+    // A mutable reference is created with &mut operator. The type of num is
+    // written as &mut i32. Compared to immutable references, we have two
+    // important differences in the permission:
+
+    // * When num was immutable reference, the vector still had the READ permission
+    //   Now, the vector has lost all permisions while num is in use.
+    // * When num was an immutable reference, the place *num only had the READ
+    // permission. Now, *num has also gained the WRITE permission.
+
+    // The first observation is what makes mutable references safe. Mutable references
+    // allow mutuation but prevent aliasing. The borrowed place vector becomes
+    // temporary unusable, so effectively not an alias.
+
+    // The second observation is what makes mutable references useful. vector[2] can be
+    // mutated through *num. For example, *num += 1 mutates vector[2]. num cannot be
+    // reassigned to a different mutable reference.
+
+    // Mutable references can also temporarily be downgraded to read-only references:
+
+    let mut another_vector: Vec<i32> = vec![1, 2, 3];
+    let num: &mut i32 = &mut another_vector[2];
+    let num2: &i32 = &*num;
+    println!(
+        "Downgraded\nOriginal reference: {}\nnew reference: {}",
+        *num, *num2
+    );
 }
 
 fn tell_full_name(name: &String, lastname: &String) {
