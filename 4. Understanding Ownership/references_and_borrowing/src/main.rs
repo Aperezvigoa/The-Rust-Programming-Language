@@ -75,14 +75,50 @@ fn main() {
     assert_eq!(x_abs1, x_abs2);
 
     let r: &Box<i32> = &x;
-    let r_abs1 = i32::abs(**r);
-    let r_abs2 = r.abs();
+    let r_abs1 = i32::abs(**r); // explicit dereference (twice) 
+    let r_abs2 = r.abs(); // implicit dereference (twice)
     assert_eq!(r_abs1, r_abs2);
 
     let s = String::from("Hello");
-    let s_len1 = str::len(&s);
-    let s_len2 = s.len();
+    let s_len1 = str::len(&s); // explicit reference
+    let s_len2 = s.len(); // implicit dereference
     assert_eq!(s_len1, s_len2);
+
+    // So, i32::abs expects a i32, so Rust will dereference the
+    // value, but we can dereference the box using x.abs().
+    // This conversion also works the opposite direction. str::len()
+    // expects a &str, so we reference our String s.
+
+    // --- Rust Avoids Simultaneus Aliasing and Mutation
+    // Pointers are a porwerful and dangerous feature, because they
+    // enable aliasing.
+    // Aliasing is accessing the same data trhought different variables
+    // We must be careful when we use aliasing combined with mutuation.
+
+    // - - - - - - - - - - - - Disaster examples:
+    // * By deallocating the aliased data. leaving the other variable
+    //   pointing to deallocated memory.
+    // * By mutating the aliased data, invalidating runtime properties
+    //   expected by the other variable.
+    // * By concurrently mutating tha aliased data, causing a data race
+    //   with nondeterministic behavior for the other variable.
+
+    // As a running example, we are going to look at programs using the
+    // vector data structure, Vec.
+    // Unlike arrays which have a fixed length, vectors have a variable
+    // length by storing their elements in the heap.
+
+    let mut using_vec: Vec<i32> = vec![1, 2, 3];
+    // The macro vec! creates a vectir with the elements between brackets.
+    // One important implementation detail is that vec allocates a heap
+    // array of a certain capacity.
+
+    using_vec.push(4);
+    println!("{}", using_vec[3]);
+
+    // When we use push, the vector has to create a new allocation with
+    // larger capacity, copy all elements over and deallocate the original
+    // heap array.
 }
 
 fn tell_full_name(name: &String, lastname: &String) {
