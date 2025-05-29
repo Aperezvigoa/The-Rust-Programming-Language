@@ -194,6 +194,25 @@ fn main() {
         "Downgraded\nOriginal reference: {}\nnew reference: {}",
         *num, *num2
     );
+
+    // --- Permissions Are Returned At The End of a Reference's Lifetime
+    // A reference chage permissions while it is "in use". The phrase "in use" is
+    // describing a reference's lifetime, or the range of code spanning from its birth.
+
+    let mut name: Vec<char> = vec!['a', 'l', 'e', 'x'];
+    ascii_capitalize(&mut name);
+    println!("{:?}", name);
+}
+
+fn ascii_capitalize(v: &mut Vec<char>) {
+    let c = &v[0];
+
+    if c.is_ascii_lowercase() {
+        let up = c.to_ascii_uppercase();
+        v[0] = up;
+    } else {
+        println!("Already capitalized!");
+    }
 }
 
 fn tell_full_name(name: &String, lastname: &String) {
