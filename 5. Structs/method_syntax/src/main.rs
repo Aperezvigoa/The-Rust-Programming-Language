@@ -28,13 +28,55 @@ impl Rectangle {
     fn area(self: &Self) -> u32 {
         self.width * self.height
     }
+    fn can_hold(self: &Self, rect: &Rectangle) -> bool {
+        self.area() > rect.area()
+    }
+    // Associated function
+    fn square(size: u32) -> Self {
+        Self {
+            width: size,
+            height: size,
+        }
+    }
 }
+
+// We choose &Self because we dont want to take ownership and we just want to read data in the
+// struct. If we need to write, we can call &mut Self.
+// The main reason for using methods instead of functions, is for organization. We've put all
+// the things we can do with an instance of a type in one impl block rather than making future
+// users of our code search for capabilities of Rectangle in various places.
+
+// Associated Functions
+// All functions defined within an impl block are called associated function because they are
+// associated with the type named after the impl. We can define associated functions as functions
+// as functions that don't have self as their first parameter because they don't need an instance
+// of the type to work with. We've already used one function like this, the String::from function
+// that's defined on the String type.
+// Associated functions that aren't methods are often used for constructors that will return a
+// new instance of the strut. These are often called new, but new is not a special name and isn't
+// built into the language.
 
 fn main() {
     let rect1 = Rectangle {
         width: 30,
         height: 50,
     };
+
+    let rect2 = Rectangle {
+        width: 10,
+        height: 40,
+    };
+    let rect3 = Rectangle {
+        width: 60,
+        height: 45,
+    };
+
     let rect1_area = rect1.area();
-    println!("The rectangle area is: {rect1_area}");
+    println!("The rectangle1 area is: {rect1_area}");
+
+    println!("Can rect1 hold rect2? {}", rect1.can_hold(&rect2));
+    println!("Can rect1 hold rect3? {}", rect1.can_hold(&rect3));
+
+    let square = Rectangle::square(3);
+    println!("{square:?}");
 }
