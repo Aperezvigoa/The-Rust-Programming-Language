@@ -56,6 +56,21 @@ impl Rectangle {
 // new instance of the strut. These are often called new, but new is not a special name and isn't
 // built into the language.
 
+// Multiple impl Blocks
+// Each struct is allowed to have multiple impl blocks:
+
+impl Rectangle {
+    // Associated function
+    fn standar() -> Self {
+        Self {
+            width: 40,
+            height: 20,
+        }
+    }
+}
+
+// There's no reason to separate these methods into multiple impl blocks here, but is a valid syntax
+
 fn main() {
     let rect1 = Rectangle {
         width: 30,
