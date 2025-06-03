@@ -1,0 +1,12 @@
+Once upon a time, in the vast digital sea, there was a brave little crab named Ferris. Unlike other crustaceans who enjoyed surfing the web or lurking in comment sections, Ferris had a dream: he wanted to build his own operating system.
+
+But not just any OS. Ferris was determined to write it in Rust. Why Rust? Because Ferris didnt like memory bugs, null pointers, or segmentation faults. He had seen what happened to his cousin Larry, the lobster, who once tried to write a kernel in C. Poor Larry still wakes up in cold sweats muttering about undefined behavior.
+
+Ferris dove deep into the world of OSDev. He learned about bootloaders, page tables, interrupt descriptors, and something terrifying called "protected mode." But with his trusty cargo tool and the fearlessness that only a crab with no garbage collector can have, he started clawing his way through the low-level abyss.
+
+He wrote no_std code, avoided the heap like a plague, and panicked only when absolutely necessary. Ferris knew that building an OS from scratch was like trying to knit a sweater using nothing but toothpicks and binary string, but he kept going.
+
+Eventually, after much hard work, Ferris booted up his Rusty OS on a virtual machine. The screen printed:
+"Hello, kernel world!"
+
+Ferris wept. Not because he had finally done it, but because he realize he now had to write a file system.
