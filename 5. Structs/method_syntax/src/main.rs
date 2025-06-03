@@ -69,7 +69,17 @@ impl Rectangle {
     }
 }
 
-// There's no reason to separate these methods into multiple impl blocks here, but is a valid syntax
+// There's no reason to separate these methods into multiple impl blocks here, but is a valid.
+
+// Method Call are Syntactic Sugar for Function Calls
+// Using all this concepts, we can now see how method calls are syntactic sugar for function calls
+// For example, let's create a set_width method
+
+impl Rectangle {
+    fn set_width(&mut self, width: u32) {
+        self.width = width;
+    }
+}
 
 fn main() {
     let rect1 = Rectangle {
@@ -94,4 +104,9 @@ fn main() {
 
     let square = Rectangle::square(3);
     println!("{square:?}");
+
+    let mut rect4 = Rectangle::standar();
+    rect4.set_width(180);
+    Rectangle::set_width(&mut rect4, 120);
+    println!("Rectangle4: {rect4:?}");
 }
