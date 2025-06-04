@@ -52,6 +52,16 @@ impl Library {
             );
         }
     }
+    fn show_available(self: &Self) {
+        for b in &self.books {
+            if b.is_available() {
+                println!(
+                    "ISBN: {} - {} from {} - Available: {}",
+                    b.isbn, b.title, b.author, b.available
+                );
+            }
+        }
+    }
     fn show_users(self: &Self) {
         for u in &self.users {
             println!("ID: {} - {}", u.id, u.name);
@@ -142,6 +152,25 @@ fn main() {
             "5" => {
                 let author_to_search = request_author();
                 Library::filter_by_author(&main_library, &author_to_search);
+            }
+            "6" => {
+                Library::show_available(&main_library);
+            }
+            "7" => {
+                Library::show_users(&main_library);
+                println!("Select the ID:");
+                let mut input_id: String = String::new();
+                overwrite_string(&mut input_id);
+                let (user_index, user_exists) = get_user_index(
+                    &main_library,
+                    input_id.trim().parse().expect("Something went wrong"),
+                );
+                if user_exists {
+                    println!("{} borrowed books:", main_library.users[user_index].name);
+                    for b in &main_library.users[user_index].borrowed_books {
+                        println!("- ISBN: {b}");
+                    }
+                }
             }
             "8" => {
                 println!("Good bye!");
