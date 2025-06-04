@@ -57,6 +57,16 @@ impl Library {
             println!("ID: {} - {}", u.id, u.name);
         }
     }
+    fn filter_by_author(self: &Self, author: &String) {
+        for b in &self.books {
+            if b.author == *author {
+                println!(
+                    "ISBN: {} - {} from {} - Available: {}",
+                    b.isbn, b.title, b.author, b.available
+                );
+            }
+        }
+    }
 }
 
 fn main() {
@@ -129,7 +139,10 @@ fn main() {
                     println!("No users or books.");
                 }
             }
-            "5" => {}
+            "5" => {
+                let author_to_search = request_author();
+                Library::filter_by_author(&main_library, &author_to_search);
+            }
             "8" => {
                 println!("Good bye!");
                 break 'program;
