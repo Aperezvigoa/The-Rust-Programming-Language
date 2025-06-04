@@ -109,13 +109,18 @@ fn main() {
                     let (user_index, user_exists) = get_user_index(&main_library, input_id);
                     if book_exists && user_exists && !main_library.books[book_index].is_available()
                     {
+                        let borrowed_books_copy =
+                            main_library.users[user_index].borrowed_books.clone();
                         let mut index_to_delete: usize = 0;
-                        for i in main_library.users[user_index].borrowed_books {
-                            if input_isbn == i {
+
+                        for i in borrowed_books_copy {
+                            if i == input_isbn {
                                 User::return_book(
                                     &mut main_library.users[user_index],
                                     index_to_delete,
                                 );
+                                Book::change_availability(&mut main_library.books[book_index]);
+                                break;
                             }
                             index_to_delete += 1;
                         }
@@ -124,7 +129,8 @@ fn main() {
                     println!("No users or books.");
                 }
             }
-            "7" => {
+            "5" => {}
+            "8" => {
                 println!("Good bye!");
                 break 'program;
             }
