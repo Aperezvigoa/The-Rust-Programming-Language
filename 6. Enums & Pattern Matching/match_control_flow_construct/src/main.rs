@@ -62,6 +62,33 @@ fn plus_one(x: Option<i32>) -> Option<i32> {
     }
 }
 
+// Matches are Exhaustive
+// There's one other aspect of match to cover, the arms patterns must cover all possibilities.
+// Using enums, we can also take special actions for a few particular values, but for all other
+// values take one default action. Imagine we're implementing a game where, if you roll a 3 on a
+// dice roll, your doesn't move, but instead gets a new fancy heat. If you roll a 7, your player
+// loses a fancy hat. For all other values, the player moves.
+
+fn roll_dice(dice: u8) {
+    match dice {
+        3 => add_fancy_hat(),
+        7 => remove_fancy_hat(),
+        other => move_player(dice),
+    }
+}
+
+fn add_fancy_hat() {
+    println!("Player gets a new fancy hat");
+}
+
+fn remove_fancy_hat() {
+    println!("Player lose the fancy hat");
+}
+
+fn move_player(num_spaces: u8) {
+    println!("Player moves {num_spaces} spaces");
+}
+
 fn main() {
     value_in_cents(Coin::Quarter(UsState::Alaska));
 
