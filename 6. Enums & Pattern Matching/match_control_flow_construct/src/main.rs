@@ -45,6 +45,27 @@ fn value_in_cents(coin: Coin) -> u8 {
     }
 }
 
+// Matching with Option<T>
+// In the previous section, we wanted to get the inner T value of Some case when using Option<T>;
+// we can also handle Option<T> using match, as we did with the Coin enum. Instead of comparing
+// coins, we'll compare tje variants of Option<T>.
+// Let's write a function that takes Option<i32> and, if there's a value inside, adds 1 to the
+// value. If there is not a value inside, the function should return the None value and not
+// attemp to perform any operations.
+// Combining match and enums is useful, we'll see this pattern a lot in Rust: match against
+// an enum, bind a variable to the data inside, and then execute code based on it.
+
+fn plus_one(x: Option<i32>) -> Option<i32> {
+    match x {
+        None => None,
+        Some(i) => Some(i + 1),
+    }
+}
+
 fn main() {
     value_in_cents(Coin::Quarter(UsState::Alaska));
+
+    let five = Some(5);
+    let six = plus_one(five);
+    let none = plus_one(None);
 }
